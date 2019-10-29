@@ -11,29 +11,39 @@ $(document).ready(function () {
      */
     var characterArr = [
         {
-            "name": "spiderman",
-            "health_points": 120,
-            "attack_power": 8
+            id: "spiderman",
+            name: "Spiderman",
+            health_points: 120,
+            attack_power: 8
         },
         {
-            "name": "ironman",
-            "health_points": 100,
-            "attack_power": 9
+            id: "ironman",
+            name: "Ironman",
+            health_points: 100,
+            attack_power: 5
         },
         {
-            "name": "thor",
-            "health_points": 150,
-            "attack_power": 10
+            id: "thor",
+            name: "thor",
+            health_points: 150,
+            attack_power: 10
         },
         {
-            "name": "captain_america",
-            "health_points": 180,
-            "attack_power": 11
+            id: "captain_america",
+            name: "Captain America",
+            health_points: 180,
+            attack_power: 25
         }
     ];
     var characterSelected = false;
     var defenderSelected = false;
-    var characterHP = 0;
+    var characterHP = 99999;
+    var characterAP = 0; // this will increase by base attack power
+    var defenderHP = 99999;
+    var defenderCAP = 0; // this remains same
+    var message = '';
+    var characterName = '';
+    var defenderName = '';
 
     $("figure").on("click", function () {
         if (characterSelected == false) {
