@@ -57,6 +57,52 @@ $(document).ready(function () {
         }
     });
 
+    $(".btn").on("click", function () {
+        if (characterHP <= 0) {
 
+        } else if (defenderHP <= 0) {
+
+        } else {
+            $.map(characterArr, function (val) {
+                if (val.id == characterSelected) {
+                    if (characterHP == 99999) {
+                        characterHP = val.health_points;
+                        characterName = val.name;
+                        console.log(characterHP + "===");
+                    }
+                    characterAP += val.attack_power;
+
+                }
+
+                if (val.id == defenderSelected) {
+                    if (defenderHP == 99999) { defenderHP = val.health_points; console.log("===" + defenderHP); }
+                    defenderName = val.name;
+                    defenderCAP = val.attack_power;
+                }
+            });
+            characterHP = characterHP - defenderCAP;
+            defenderHP = defenderHP - characterAP;
+            //console.log(characterSelected + "===" + defenderSelected);
+            console.log(characterHP + "===" + defenderHP);
+            console.log(characterAP + "===" + defenderCAP);
+
+            if (characterHP <= 0) {
+                message = "<div id='messageDiv'>You been defeated.... GAME OVER!!!</div>";
+            } else if (defenderHP <= 0) {
+                message = "<div id='messageDiv'>You have defeated " + defenderName + ", you can choose to fight another enemy.</div>";
+            } else {
+                message = "<div id='messageDiv'>"
+                message += "<div>You attacked " + defenderName + " for " + characterAP + " damage. </div>";
+                message += "<div>" + defenderName + " attacked you back for " + defenderCAP + " damage.</div>";
+                message += "</div>";
+            }
+
+            if (message) {
+                $("#messageDiv").remove();
+                var failedDiv = $(message);
+                $("#button-div").append(failedDiv);
+            }
+        }
+    });
 });
 
