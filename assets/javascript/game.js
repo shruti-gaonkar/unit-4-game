@@ -104,6 +104,9 @@ $(document).ready(function () {
                         message += "<div>You won!!</div>";
                         message += "<div>GAME OVER!!</div>";
                         message += "</div>";
+
+                        console.log($('button-restart-div'));
+                        $('#button-restart').removeClass("d-none").addClass("d-block");
                     } else {
                         message = "<div id='messageDiv'>You have defeated " + defenderName + ", you can choose to fight another enemy.</div>";
                     }
@@ -125,6 +128,10 @@ $(document).ready(function () {
                 }
             }
         }
+    });
+
+    $("#button-restart").on("click", function () {
+        $("#main-content").load(location.href + " #main-content>*", "");
     });
 });
 
