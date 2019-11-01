@@ -14,25 +14,29 @@ $(document).ready(function () {
             id: "spiderman",
             name: "Spiderman",
             health_points: 120,
-            attack_power: 8
+            attack_power: 8,
+            counter_attack_power: 15
         },
         {
             id: "ironman",
             name: "Ironman",
             health_points: 100,
-            attack_power: 5
+            attack_power: 7,
+            counter_attack_power: 5
         },
         {
             id: "thor",
             name: "thor",
             health_points: 150,
-            attack_power: 10
+            attack_power: 9,
+            counter_attack_power: 20
         },
         {
             id: "captain_america",
             name: "Captain America",
             health_points: 180,
-            attack_power: 25
+            attack_power: 6,
+            counter_attack_power: 25
         }
     ];
     var characterSelected = false;
@@ -44,16 +48,20 @@ $(document).ready(function () {
     var message = '';
     var characterName = '';
     var defenderName = '';
+    var numOfEnemies = 0;
+
 
     $("figure").on("click", function () {
         if (characterSelected == false) {
             $(this).appendTo("#character_area");
             $("#all_character_area").find(".figure").appendTo("#enemies_area");
+            numOfEnemies = $('#enemies_area .figure').length;
             characterSelected = $(this).attr("id");
 
-        } else if (defenderSelected == false) {
+        } else if (defenderSelected == false && $(this).attr("id") != characterSelected) {
             $(this).appendTo("#defender_area");
             defenderSelected = $(this).attr("id");
+            $('.btn').show();
         }
     });
 
@@ -86,21 +94,35 @@ $(document).ready(function () {
             console.log(characterHP + "===" + defenderHP);
             console.log(characterAP + "===" + defenderCAP);
 
-            if (characterHP <= 0) {
-                message = "<div id='messageDiv'>You been defeated.... GAME OVER!!!</div>";
-            } else if (defenderHP <= 0) {
-                message = "<div id='messageDiv'>You have defeated " + defenderName + ", you can choose to fight another enemy.</div>";
-            } else {
-                message = "<div id='messageDiv'>"
-                message += "<div>You attacked " + defenderName + " for " + characterAP + " damage. </div>";
-                message += "<div>" + defenderName + " attacked you back for " + defenderCAP + " damage.</div>";
-                message += "</div>";
-            }
+            if (characterSelected && defenderSelected) {
+                if (characterHP <= 0) {
+                    message = "<div id='messageDiv'>You been defeated.... GAME OVER!!!</div>";
+                } else if (defenderHP <= 0) {
+                    numOfEnemies--;
+                    if (numOfEnemies == 0) {
+                        message = "<div id='messageDiv'>"
+                        message += "<div>You won!!</div>";
+                        message += "<div>GAME OVER!!</div>";
+                        message += "</div>";
+                    } else {
+                        message = "<div id='messageDiv'>You have defeated " + defenderName + ", you can choose to fight another enemy.</div>";
+                    }
+                    $('#' + defenderSelected).remove();
+                    $('.btn').hide();
+                    defenderSelected = false;
+                    defenderHP = 99999;
+                } else {
+                    message = "<div id='messageDiv'>"
+                    message += "<div>You attacked " + defenderName + " for " + characterAP + " damage. </div>";
+                    message += "<div>" + defenderName + " attacked you back for " + defenderCAP + " damage.</div>";
+                    message += "</div>";
+                }
 
-            if (message) {
-                $("#messageDiv").remove();
-                var failedDiv = $(message);
-                $("#button-div").append(failedDiv);
+                if (message) {
+                    $("#messageDiv").remove();
+                    var failedDiv = $(message);
+                    $("#button-div").append(failedDiv);
+                }
             }
         }
     });
