@@ -65,7 +65,7 @@ $(document).ready(function () {
         }
     });
 
-    $(".btn").on("click", function () {
+    $(".btn-attack").on("click", function () {
         if (characterHP <= 0) {
 
         } else if (defenderHP <= 0) {
@@ -130,7 +130,7 @@ $(document).ready(function () {
         }
     });
 
-    $("#button-restart").on("click", function () {
+    $("#btn-restart").on("click", function () {
         $("#main-content").load(location.href + " #main-content>*", "");
     });
 });
