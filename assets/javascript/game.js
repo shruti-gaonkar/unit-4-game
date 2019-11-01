@@ -65,7 +65,7 @@ $(document).ready(function () {
         }
     });
 
-    $(".btn-attack").on("click", function () {
+    $("#btn-attack").on("click", function () {
         if (characterHP <= 0) {
 
         } else if (defenderHP <= 0) {
