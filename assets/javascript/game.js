@@ -54,7 +54,7 @@ $(document).ready(function () {
     $.map(characterArr, function (val) {
         charhtml += '<figure id="' + val.id + '" class="figure m-5">';
         charhtml += '<figcaption class="figure-caption text-center">' + val.name + '</figcaption >';
-        charhtml += '<img src="assets/images/' + val.id + '.png" class="figure-img img-fluid rounded" alt="' + val.name + '" style="width:150px;">';
+        charhtml += '<img src="assets/images/' + val.id + '.png" class="figure-img img-fluid rounded cursor-pointer" alt="' + val.name + '" style="width:150px;">';
         charhtml += '<figcaption id="' + val.id + '_hp" class="figure-caption text-center">' + val.health_points + '</figcaption>';
         charhtml += '</figure>';
         $("#all_character_area").html(charhtml);
@@ -68,20 +68,20 @@ $(document).ready(function () {
             $("#all_character_area").find(".figure").appendTo("#enemies_area");
             numOfEnemies = $('#enemies_area .figure').length;
             characterSelected = $(this).attr("id");
-
+            message = "<div>Choose an enemy to play</div>";
+            if (message) {
+                show_message(message);
+            }
         } else if (defenderSelected == false && $(this).attr("id") != characterSelected) {
             $(this).appendTo("#defender_area");
             defenderSelected = $(this).attr("id");
-            $('.btn').show();
+            $('#btn-attack').removeClass('d-none');
+            show_message(message);
         }
     });
 
     $("#btn-attack").on("click", function () {
-        if (characterHP <= 0) {
-
-        } else if (defenderHP <= 0) {
-
-        } else {
+        if (characterHP > 0 || defenderHP > 0) {
             $.map(characterArr, function (val) {
                 if (val.id == characterSelected) {
                     if (characterHP == 99999) {
@@ -107,11 +107,11 @@ $(document).ready(function () {
                 $("#" + characterSelected + "_hp").text(characterHP);
                 $("#" + defenderSelected + "_hp").text(defenderHP);
 
+                $('#btn-attack').addClass("d-none");
                 if (characterHP <= 0) {
                     message = "<div>You've been defeated.... GAME OVER!!!</div>";
                     $('#enemy_row_id').addClass("d-none");
                     $('#btn_restart_div').removeClass("d-none");
-                    $('#button_div').addClass("d-none");
                 } else if (defenderHP <= 0) {
                     numOfEnemies--;
                     if (numOfEnemies == 0) {
@@ -119,30 +119,34 @@ $(document).ready(function () {
                         message += "<div>GAME OVER!!</div>";
                         $('#enemy_row_id').addClass("d-none");
                         $('#btn_restart_div').removeClass("d-none");
-                        $('#button_div').addClass("d-none");
                     } else {
                         message = "<div>You have defeated " + defenderName + ", you can choose to fight another enemy.</div>";
                     }
                     $('#' + defenderSelected).remove();
-                    $('.btn').hide();
                     defenderSelected = false;
                     defenderHP = 99999;
                 } else {
                     message = "<div>You attacked " + defenderName + " for " + characterAP + " damage. </div>";
                     message += "<div>" + defenderName + " attacked you back for " + defenderCAP + " damage.</div>";
+                    $('#btn-attack').removeClass("d-none");
                 }
 
-                if (message) {
-                    //$("#messageDiv").remove();
-                    $("#msg_div").html(message);
-                    $("#msg_div").find("div").addClass("alert alert-danger font-weight-bold");
-                }
+                show_message(message);
             }
         }
     });
 
     $("#btn-restart").on("click", function () {
-        $("#main-content").load(location.href + " #main-content>*", "");
+        location.reload();
     });
 });
+
+function show_message(message) {
+    if (message) {
+        $("#msg_div").html(message);
+        $("#msg_div").find("div").addClass("alert alert-danger font-weight-bold");
+    } else {
+        $("#msg_div").html('');
+    }
+}
 
