@@ -26,7 +26,7 @@ $(document).ready(function () {
         },
         {
             id: "thor",
-            name: "thor",
+            name: "Thor",
             health_points: 150,
             attack_power: 9,
             counter_attack_power: 20
@@ -49,10 +49,21 @@ $(document).ready(function () {
     var characterName = '';
     var defenderName = '';
     var numOfEnemies = 0;
+    var charhtml = '';
 
+    $.map(characterArr, function (val) {
+        charhtml += '<figure id="' + val.id + '" class="figure m-5">';
+        charhtml += '<figcaption class="figure-caption text-center">' + val.name + '</figcaption >';
+        charhtml += '<img src="assets/images/' + val.id + '.png" class="figure-img img-fluid rounded" alt="' + val.name + '" style="width:150px;">';
+        charhtml += '<figcaption id="' + val.id + '_hp" class="figure-caption text-center">' + val.health_points + '</figcaption>';
+        charhtml += '</figure>';
+        $("#all_character_area").html(charhtml);
+    });
 
     $("figure").on("click", function () {
         if (characterSelected == false) {
+            $('#char_def_row_id').removeClass("d-none");
+            $('#enemy_row_id').removeClass("d-none");
             $(this).appendTo("#character_area");
             $("#all_character_area").find(".figure").appendTo("#enemies_area");
             numOfEnemies = $('#enemies_area .figure').length;
@@ -106,7 +117,7 @@ $(document).ready(function () {
                         message += "</div>";
 
                         console.log($('button-restart-div'));
-                        $('#button-restart').removeClass("d-none").addClass("d-block");
+                        $('#button-restart').removeClass("d-none");
                     } else {
                         message = "<div id='messageDiv'>You have defeated " + defenderName + ", you can choose to fight another enemy.</div>";
                     }
@@ -116,15 +127,15 @@ $(document).ready(function () {
                     defenderHP = 99999;
                 } else {
                     message = "<div id='messageDiv'>"
-                    message += "<div>You attacked " + defenderName + " for " + characterAP + " damage. </div>";
-                    message += "<div>" + defenderName + " attacked you back for " + defenderCAP + " damage.</div>";
+                    message += "<div class='alert alert-danger font-weight-bold'>You attacked " + defenderName + " for " + characterAP + " damage. </div>";
+                    message += "<div class='alert alert-danger font-weight-bold'>" + defenderName + " attacked you back for " + defenderCAP + " damage.</div>";
                     message += "</div>";
                 }
 
                 if (message) {
                     $("#messageDiv").remove();
                     var failedDiv = $(message);
-                    $("#button-div").append(failedDiv);
+                    $("#msg_div").append(failedDiv);
                 }
             }
         }

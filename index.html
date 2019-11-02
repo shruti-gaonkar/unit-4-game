@@ -14,94 +14,52 @@
 
 <body class="d-flex flex-column">
     <header>
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <div class="container">
-                <div class="nav-header text-center">
-                    Shruti
-                </div>
-            </div>
-        </nav>
+
+        <div class="nav-header text-center">
+            Avengers RPG
+        </div>
+
     </header>
 
     <main id="main-content">
         <script type="text/javascript" src="assets/javascript/game.js"></script>
         <div class="container page-content mt-5 mb-5">
             <div class="row">
-                <div class="col-md-12 mt-3">
-                    <h1></h1>
-                    <hr />
-                </div>
-            </div>
-
-            <div class="row">
                 <div id="all_character_area" class="col-12">
-                    <figure id="spiderman" class="figure">
-                        <figcaption class="figure-caption">A caption for the above image.</figcaption>
-                        <img src="assets/images/200x200.png" class="figure-img img-fluid rounded"
-                            alt="A generic square placeholder image with rounded corners in a figure."
-                            style='width:150px;'>
-                        <figcaption class="figure-caption">A caption for the above image.</figcaption>
-                    </figure>
-                    <figure id="captain_america" class="figure">
-                        <figcaption class="figure-caption">A caption for the above image.</figcaption>
-                        <img src="assets/images/200x200.png" class="figure-img img-fluid rounded"
-                            alt="A generic square placeholder image with rounded corners in a figure."
-                            style='width:150px;'>
-                        <figcaption class="figure-caption">A caption for the above image.</figcaption>
-                    </figure>
-                    <figure id="ironman" class="figure">
-                        <figcaption class="figure-caption">A caption for the above image.</figcaption>
-                        <img src="assets/images/200x200.png" class="figure-img img-fluid rounded"
-                            alt="A generic square placeholder image with rounded corners in a figure."
-                            style='width:150px;'>
-                        <figcaption class="figure-caption">A caption for the above image.</figcaption>
-                    </figure>
-                    <figure id="thor" class="figure">
-                        <figcaption class="figure-caption">A caption for the above image.</figcaption>
-                        <img src="assets/images/200x200.png" class="figure-img img-fluid rounded"
-                            alt="A generic square placeholder image with rounded corners in a figure."
-                            style='width:150px;'>
-                        <figcaption class="figure-caption">A caption for the above image.</figcaption>
-                    </figure>
                 </div>
             </div>
 
-            <div class="row">
-                <div class="col-4">
-                    <div class="card">
-                        <h3 class="card-header">Your Character</h3>
-                        <div id="character_area" class="card-body">
+            <div class="row d-none" id="char_def_row_id">
+                <div class="col-4 text-center p-1">
+                    <h5>Your Character</h5>
+                    <div id="character_area">
 
-                        </div>
+                    </div>
+                </div>
+
+                <div class="col-4 text-center mt-5">
+                    <div id="button-div" class="p-1">
+                        <button id="btn-attack" type="button" class="btn btn-danger">Attack</button>
+                    </div>
+                    <div id="msg_div"></div>
+                    <div id="button-restart-div" class="d-none p-5">
+                        <button id="btn-restart" type="button" class="btn btn-secondary">Restart</button>
                     </div>
                 </div>
 
                 <div class="col-4">
-                    <div id="button-div" class="card-body">
-                        <button id="btn-attack" type="button" class="btn btn-primary">Attack</button>
-                    </div>
-                    <div id="button-restart-div" class="card-body">
-                        <button id="btn-restart" type="button" class="btn btn-primary ">Restart</button>
-                    </div>
-                </div>
+                    <h5 class="text-center p-1">Defender</h5>
+                    <div id="defender_area" class="text-center">
 
-                <div class="col-4">
-                    <div class="card">
-                        <h3 class="card-header">Defender</h3>
-                        <div id="defender_area" class="card-body">
-
-                        </div>
                     </div>
                 </div>
             </div>
 
-            <div class="row">
+            <div class="row d-none" id="enemy_row_id">
                 <div class="col-12">
-                    <div class="card">
-                        <h3 class="card-header">Enemies available to attack</h3>
-                        <div class="card-body" id="enemies_area">
+                    <h5>Enemies available to attack</h5>
+                    <div id="enemies_area">
 
-                        </div>
                     </div>
                 </div>
             </div>
