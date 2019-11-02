@@ -87,7 +87,6 @@ $(document).ready(function () {
                     if (characterHP == 99999) {
                         characterHP = val.health_points;
                         characterName = val.name;
-                        //console.log(characterHP + "===");
                     }
                     characterAP += val.attack_power;
 
@@ -99,13 +98,12 @@ $(document).ready(function () {
                     defenderCAP = val.counter_attack_power;
                 }
             });
-            //console.log(characterSelected + "===" + defenderSelected);
-            //console.log(characterHP + "===" + defenderHP);
-            //console.log(characterAP + "===" + defenderCAP);
 
             if (characterSelected && defenderSelected) {
-                characterHP = characterHP - defenderCAP;
                 defenderHP = defenderHP - characterAP;
+                if (defenderHP > 0) {
+                    characterHP = characterHP - defenderCAP;
+                }
                 $("#" + characterSelected + "_hp").text(characterHP);
                 $("#" + defenderSelected + "_hp").text(defenderHP);
 
