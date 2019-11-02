@@ -46,7 +46,7 @@ $(document).ready(function () {
     var characterName = '';
     var defenderName = '';
     var numOfEnemies = 0;
-    var charhtml = '';
+    var charhtml = '<h4>Choose your character</h4>';
 
     /**
      * html to display all characters on load
@@ -74,6 +74,7 @@ $(document).ready(function () {
             $(this).appendTo("#character_area");
 
             /* append all enemies to enemy area */
+            $("#all_character_area").find("h4").remove();
             $("#all_character_area").find(".figure").appendTo("#enemies_area");
 
             /* Count the number of enemies */
@@ -83,7 +84,7 @@ $(document).ready(function () {
             characterSelected = $(this).attr("id");
 
             /* When your character is selected display message to choose enemy */
-            show_message("<div>Choose an enemy to play</div>");
+            show_message("<div>Choose an enemy from the list below</div>");
 
         } else if (defenderSelected == false && $(this).attr("id") != characterSelected) {
             /* Defender is appended to defender_area div */
