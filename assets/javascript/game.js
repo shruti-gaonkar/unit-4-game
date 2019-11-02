@@ -93,6 +93,8 @@ $(document).ready(function () {
             /* Defender is assigned to defender_area */
             defenderSelected = $(this).attr("id");
 
+            show_message(); // hide choose enemy message once defender selected
+
             /* show the attack button when defender is selected */
             $('#btn-attack').removeClass('d-none');
         }
@@ -184,5 +186,7 @@ function show_message(message) {
     if (message) {
         $("#msg_div").html(message);
         $("#msg_div").find("div").addClass("alert alert-danger font-weight-bold");
+    } else {
+        $("#msg_div").html('');
     }
 }
