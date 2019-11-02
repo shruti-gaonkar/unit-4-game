@@ -137,8 +137,8 @@ h1{
 }
 
 .footer {
-    background-color: #666666;
-    color: #ccccb3;
-    border-top: 6px solid #4aaaa5;
+    background-color: #000;
+    color: #fff;
+    border-top: 6px solid #C2322B;
     font-size: 0.8rem;
 }

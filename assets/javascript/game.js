@@ -87,7 +87,7 @@ $(document).ready(function () {
                     if (characterHP == 99999) {
                         characterHP = val.health_points;
                         characterName = val.name;
-                        console.log(characterHP + "===");
+                        //console.log(characterHP + "===");
                     }
                     characterAP += val.attack_power;
 
@@ -96,46 +96,48 @@ $(document).ready(function () {
                 if (val.id == defenderSelected) {
                     if (defenderHP == 99999) { defenderHP = val.health_points; console.log("===" + defenderHP); }
                     defenderName = val.name;
-                    defenderCAP = val.attack_power;
+                    defenderCAP = val.counter_attack_power;
                 }
             });
-            characterHP = characterHP - defenderCAP;
-            defenderHP = defenderHP - characterAP;
             //console.log(characterSelected + "===" + defenderSelected);
-            console.log(characterHP + "===" + defenderHP);
-            console.log(characterAP + "===" + defenderCAP);
+            //console.log(characterHP + "===" + defenderHP);
+            //console.log(characterAP + "===" + defenderCAP);
 
             if (characterSelected && defenderSelected) {
+                characterHP = characterHP - defenderCAP;
+                defenderHP = defenderHP - characterAP;
+                $("#" + characterSelected + "_hp").text(characterHP);
+                $("#" + defenderSelected + "_hp").text(defenderHP);
+
                 if (characterHP <= 0) {
-                    message = "<div id='messageDiv'>You been defeated.... GAME OVER!!!</div>";
+                    message = "<div>You've been defeated.... GAME OVER!!!</div>";
+                    $('#enemy_row_id').addClass("d-none");
+                    $('#btn_restart_div').removeClass("d-none");
+                    $('#button_div').addClass("d-none");
                 } else if (defenderHP <= 0) {
                     numOfEnemies--;
                     if (numOfEnemies == 0) {
-                        message = "<div id='messageDiv'>"
-                        message += "<div>You won!!</div>";
+                        message = "<div>You won!!</div>";
                         message += "<div>GAME OVER!!</div>";
-                        message += "</div>";
-
-                        console.log($('button-restart-div'));
-                        $('#button-restart').removeClass("d-none");
+                        $('#enemy_row_id').addClass("d-none");
+                        $('#btn_restart_div').removeClass("d-none");
+                        $('#button_div').addClass("d-none");
                     } else {
-                        message = "<div id='messageDiv'>You have defeated " + defenderName + ", you can choose to fight another enemy.</div>";
+                        message = "<div>You have defeated " + defenderName + ", you can choose to fight another enemy.</div>";
                     }
                     $('#' + defenderSelected).remove();
                     $('.btn').hide();
                     defenderSelected = false;
                     defenderHP = 99999;
                 } else {
-                    message = "<div id='messageDiv'>"
-                    message += "<div class='alert alert-danger font-weight-bold'>You attacked " + defenderName + " for " + characterAP + " damage. </div>";
-                    message += "<div class='alert alert-danger font-weight-bold'>" + defenderName + " attacked you back for " + defenderCAP + " damage.</div>";
-                    message += "</div>";
+                    message = "<div>You attacked " + defenderName + " for " + characterAP + " damage. </div>";
+                    message += "<div>" + defenderName + " attacked you back for " + defenderCAP + " damage.</div>";
                 }
 
                 if (message) {
-                    $("#messageDiv").remove();
-                    var failedDiv = $(message);
-                    $("#msg_div").append(failedDiv);
+                    //$("#messageDiv").remove();
+                    $("#msg_div").html(message);
+                    $("#msg_div").find("div").addClass("alert alert-danger font-weight-bold");
                 }
             }
         }
