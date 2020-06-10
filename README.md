@@ -18,7 +18,7 @@ Description
 
    * Once the player selects an opponent, that enemy is moved to a `defender area`.
 
-   ![Defender Area!](assets/images/screen3.png)
+   ![Defender Area!](assets/images/screen2.png)
 
    * The player will now be able to click the `attack` button.
      * Whenever the player clicks `attack`, their character damages the defender. The opponent will lose `HP` (health points). These points are displayed at the bottom of the defender's picture. 
@@ -34,7 +34,7 @@ Description
 
 4. The player wins the game by defeating all enemy characters. The player loses the game the game if their character's `HP` falls to zero or below.
 
-   ![Final screen!](assets/images/screen4.png)
+   ![Final screen!](assets/images/screen5.png)
 
 Technologies
 HTML, CSS, JQuery
